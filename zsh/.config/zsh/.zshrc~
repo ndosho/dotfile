@@ -1,9 +1,4 @@
 export PATH=/bin:/usr/bin:/usr/local/bin:/home/linuxbrew/.linuxbrew/bin
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-if ! pgrep -u $USER -x "emacs --daemon > /dev/null; then
-  emacs --daemon
-fi
-
-
 eval "$(starship init zsh)"
