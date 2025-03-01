@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# Path to emacs and emacsclient
+EMACS=/home/linuxbrew/.linuxbrew/bin/emacs
+EMACSCLIENT=/home/linuxbrew/.linuxbrew/bin/emacsclient
+
+# Check if the daemon is running
+is_emacs_daemon_running() {
+    pgrep -u "$USER" -f "emacs --daemon" > /dev/null
+}
+
+# Start the daemon
+start_daemon() {
+    if is_emacs_daemon_running; then
+	echo "Emacs daemon is already running."
+    else
+	echo "Starting Emacs daemon..."
+	$EMACS --daemon
+    fi
+}
+
+# Stop the daemon
+stop_daemon() {
+    if is_emacs_daemon_running; then
+	echo "Stopping the daemon..."
+        $EMACSCLIENT --eval "(kill-emacs)"
+    else
+	echo "Emacs daemon is not running."
+    fi
+}
+
+# Check the status
+status_daemon() {
+    if is_emacs_daemon_running; then
+	echo "Emacs daemon is running."
+    else
+	echo "Emacs daemon is not running."
+    fi
+}
+
+case "$1" in
+    start)
+	start_daemon
+	;;
+    stop)
+	stop_daemon
+	;;
+    status)
+	status_daemon
+	;;
+    restart)
+	stop_daemon
+	sleep 1
+	start_daemon
+	;;
+    *)
+	echo "Usage: $0 {start|stop|status|restart}"
+	exit 1
+	;;
+esac
+
+	
+    
