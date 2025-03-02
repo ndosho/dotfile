@@ -17,6 +17,10 @@ HISTFILE=/home/ns/.zsh_history
 HISTSIZE=10000
 SAVEHIST=1000
 
+source ~/.config/zsh/plugins/zsh-substring-search/zsh-history-substring-search.zsh
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+
 man() {
   if command -v fzf > /dev/null 2>&1
   then
