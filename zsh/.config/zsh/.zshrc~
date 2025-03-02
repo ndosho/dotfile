@@ -8,7 +8,30 @@ export PAGER=bat
 alias em="emacsclient -c -a ''"
 alias nl="sudo nala"
 
+man() {
+  if command -v fzf > /dev/null 2>&1
+  then
+    local page=$(command man -k . | fzf --prompt='Man> ' | awk '{print $1}')
+    if [[ -n $page ]]
+    then 
+      emacsclient -c -a "" +"Man $page | only"
+    fi 
+  else 
+    emacsclient -c -a "" +"Man $1 | only"
+  fi
+}
 
+function ff() {
+  local selected_files
+  selected_files=$(fzf -m --preview="bat --style=numbers --line-range :500 --color=always {}")
+  if [[ -n $selected_files ]]; then 
+    emacsclient -c -a "" $selected_files
+  fi 
+}
+
+function pkill {
+  ps aux | fzf --height 40% --layout=reverse --prompt="Select process to kill: " | awk '{print $2}' | xargs -r sudo kill
+}
 
 
 eval "$(starship init zsh)"

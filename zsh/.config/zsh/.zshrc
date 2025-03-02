@@ -8,6 +8,15 @@ export PAGER=bat
 alias em="emacsclient -c -a ''"
 alias nl="sudo nala"
 
+setopt autocd
+setopt extended_glob
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+HISTFILE=/home/ns/.zsh_history
+HISTSIZE=10000
+SAVEHIST=1000
+
 man() {
   if command -v fzf > /dev/null 2>&1
   then
