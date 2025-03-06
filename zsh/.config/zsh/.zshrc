@@ -1,6 +1,9 @@
 export PATH=/bin:/usr/bin:/usr/local/bin:/home/linuxbrew/.linuxbrew/bin
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+GUIX_PROFILE=$HOME/.config/guix/current
+. "$GUIX_PROFILE/etc/profile"
+
 export EDITOR="emacsclient -t -a ''"
 export VISUAL="emacsclient -c -a ''"
 export PAGER=bat
@@ -16,6 +19,10 @@ setopt HIST_IGNORE_SPACE
 HISTFILE=/home/ns/.zsh_history
 HISTSIZE=10000
 SAVEHIST=1000
+
+source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 
 source ~/.config/zsh/plugins/zsh-substring-search/zsh-history-substring-search.zsh
 bindkey '^P' history-substring-search-up
